@@ -7,7 +7,7 @@ import java.util.List;
 public class Spot {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     @Enumerated(value = EnumType.STRING)
     private SpotType spotType;
     private int pricePerHour;
@@ -18,7 +18,7 @@ public class Spot {
     @OneToMany(mappedBy = "spot",cascade = CascadeType.ALL)
     private List<Reservation> reservationList;
 //    Getter and setter
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 

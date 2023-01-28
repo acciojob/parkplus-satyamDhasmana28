@@ -37,7 +37,6 @@ public class PaymentServiceImpl implements PaymentService {
             throw new Exception("Payment mode not detected");
         }
         Payment payment =new Payment();
-
         if(paymentMode=="CASH"){
         payment.setPaymentMode(PaymentMode.CASH);
         } else if (paymentMode=="CARD") {
