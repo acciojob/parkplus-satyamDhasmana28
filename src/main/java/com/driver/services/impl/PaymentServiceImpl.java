@@ -14,7 +14,7 @@ import java.util.Set;
 
 @Service
 public class PaymentServiceImpl implements PaymentService {
-    Set<String> modeSet = new HashSet<>() ;
+
     @Autowired
     ReservationRepository reservationRepository2;
     @Autowired
@@ -27,28 +27,27 @@ public class PaymentServiceImpl implements PaymentService {
         if(amountSent<bill){
             throw new Exception("Insufficient Amount");
         }
-//        cashh
         String paymentMode = mode.toUpperCase();
-        if(modeSet.isEmpty()){
-            modeSet.add("CASH");
-            modeSet.add("CARD");
-            modeSet.add("UPI");
+        Payment payment = new Payment();
+
+        switch (paymentMode) {
+            case "CASH":
+                payment.setPaymentMode(PaymentMode.CASH);
+                break;
+            case "CARD":
+                payment.setPaymentMode(PaymentMode.CARD);
+                break;
+            case "UPI":
+                payment.setPaymentMode(PaymentMode.UPI);
+                break;
+            default:
+                throw new Exception("Payment mode not detected");
         }
-        if(!modeSet.contains(paymentMode)){
-            throw new Exception("Payment mode not detected");
-        }
-        Payment payment =new Payment();
-        if(paymentMode=="CASH"){
-        payment.setPaymentMode(PaymentMode.CASH);
-        } else if (paymentMode=="CARD") {
-            payment.setPaymentMode(PaymentMode.CARD);
-        }else{
-            payment.setPaymentMode(PaymentMode.UPI);
-        }
+
         payment.setPaymentCompleted(true);
         payment.setReservation(reservation);
         reservation.setPayment(payment);
-//        occupid = true for that particular spot
+
        reservation.getSpot().setOccupied(true);
 
        reservationRepository2.save(reservation);
