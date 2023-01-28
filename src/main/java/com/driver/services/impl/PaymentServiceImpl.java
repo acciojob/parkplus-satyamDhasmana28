@@ -14,7 +14,7 @@ import java.util.Set;
 
 @Service
 public class PaymentServiceImpl implements PaymentService {
-    static Set<String> modeSet = new HashSet<>() ;
+    Set<String> modeSet = new HashSet<>() ;
     @Autowired
     ReservationRepository reservationRepository2;
     @Autowired
